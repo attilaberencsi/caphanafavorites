@@ -11,7 +11,10 @@
     "@cap-js/sqlite": "^2"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "build:hana": "cds build --for hana",
+    "watch:hybrid" : "cds watch --profile hybrid",
+    "deploy:hana:hybrid": "cds deploy --to hana --profile hybrid"
   },
   "private": true,
   "cds": {
