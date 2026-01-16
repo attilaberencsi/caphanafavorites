@@ -1,0 +1,182 @@
+{
+  "_version": "1.76.0",
+  "sap.app": {
+    "id": "com.sapdev.eu.favorites.page",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.0",
+      "toolsId": "b4dfe942-1f1c-43bb-beb8-ad2c132fe31c"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/admin/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SapdevFavoritePage-manage": {
+          "semanticObject": "SapdevFavoritePage",
+          "action": "manage",
+          "title": "{{SapdevFavoritePage-manage.flpTitle}}",
+          "subTitle": "{{SapdevFavoritePage-manage.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.143.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.sapdev.eu.favorites.page.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "PageList",
+          "target": "PageList"
+        },
+        {
+          "pattern": "Page({key}):?query:",
+          "name": "PageObjectPage",
+          "target": "PageObjectPage"
+        },
+        {
+          "pattern": "Page({key})/groups({key2}):?query:",
+          "name": "GroupObjectPage",
+          "target": "GroupObjectPage"
+        }
+      ],
+      "targets": {
+        "PageList": {
+          "type": "Component",
+          "id": "PageList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Page",
+              "variantManagement": "Page",
+              "navigation": {
+                "Page": {
+                  "detail": {
+                    "route": "PageObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PageObjectPage": {
+          "type": "Component",
+          "id": "PageObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Page",
+              "navigation": {
+                "groups": {
+                  "detail": {
+                    "route": "GroupObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "GroupObjectPage": {
+          "type": "Component",
+          "id": "GroupObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Page/groups"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "caphanafavorites.service"
+  }
+}
