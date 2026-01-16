@@ -2,6 +2,12 @@ using {managed} from '@sap/cds/common';
 
 namespace sapdev.fav;
 
+type Header      : localized String(40) @title: 'Title';
+type SubHeader   : localized String(40) @title: 'Subtitle';
+type URL         : String(2048) @title: 'Document Link';
+type HeaderImage : String(1024) @title: 'Icon';
+
+
 entity Page : managed {
     key ID          : Integer;
         name        : localized String(60);
@@ -23,12 +29,11 @@ entity Page.Group : managed {
 
 entity Group.Tile : managed {
     key ID          : Integer;
-        // key page        : Association to Page;
     key group       : Association to Page.Group;
-        header      : localized String(40);
-        subHeader   : localized String(40);
-        url         : String(2048);
-        headerImage : String(1024);
+        header      : Header;
+        subHeader   : SubHeader;
+        url         : URL;
+        headerImage : HeaderImage;
         appShortcut : localized String(15);
         systeminfo  : localized String(14);
 }
@@ -36,8 +41,8 @@ entity Group.Tile : managed {
 entity Group.Link : managed {
     key ID          : Integer;
     key group       : Association to Page.Group;
-        header      : localized String(40);
-        subHeader   : localized String(40);
-        url         : String(2048);
-        headerImage : String(1024);
+        header      : Header;
+        subHeader   : SubHeader;
+        url         : URL;
+        headerImage : HeaderImage;
 }
