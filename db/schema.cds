@@ -23,7 +23,7 @@ entity Page.Group : managed {
         description : localized String(256);
         tiles       : Composition of many Group.Tile
                           on tiles.group = $self;
-        links       : Composition of many Group.Tile
+        links       : Composition of many Group.Link
                           on links.group = $self;
 }
 
