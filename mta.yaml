@@ -114,7 +114,7 @@ resources:
           instance:
             existing_destinations_policy: update
             destinations:
-              - Name: srv-api
+              - Name: favorites-srv-api
                 URL: ~{srv-api/srv-url}
                 Authentication: NoAuthentication
                 Type: HTTP
