@@ -16,9 +16,15 @@ modules:
       srv-url: ${default-url}
   parameters:
     buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+    disk-quota: 512M
+    memory: 512M  
     instances: 1
   build-parameters:
     builder: npm-ci
+    ignore:
+      - "node_modules/"    
 - name: caphanafavorites-db-deployer
   type: hdb
   path: gen/db
@@ -26,16 +32,19 @@ modules:
   - name: caphanafavorites-db
   parameters:
     buildpack: nodejs_buildpack
+  build-parameters:
+    ignore:
+      - "node_modules/"    
 - name: caphanafavorites-app-deployer
   type: com.sap.application.content
   path: gen
   requires:
-  - name: caphanafavorites-auth
-  - name: srv-api
+  # - name: caphanafavorites-auth
+  # - name: srv-api
   - name: caphanafavorites-html5-repo-host
     parameters:
-      config:
-        HTML5Runtime_enabled: true
+      # config:
+      #   HTML5Runtime_enabled: true
       content-target: true
   build-parameters:
     build-result: app/
