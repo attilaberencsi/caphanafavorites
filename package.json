@@ -26,7 +26,8 @@
     "watch-page": "cds watch --open com.sapdev.eu.favorites.page/index.html?sap-ui-xx-viewCache=false --livereload false",
     "undeploy": "cf undeploy caphanafavorites --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "cf-login": "cf login -a https://api.cf.eu20-001.hana.ondemand.com --sso -o sapdevbuild -s dev"
   },
   "private": true,
   "cds": {
